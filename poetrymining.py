@@ -2,8 +2,9 @@
 
 # A script to retrieve poetry text and separate it by technological development.
 
-import urllib2
+import time, re
 from bs4 import BeautifulSoup
+from selenium import webdriver
 
 # Create the files for our words.
 
@@ -16,33 +17,49 @@ internet = open('internet.txt', 'w')
 # Is the list is finalized?
 tech_words = open('text_words.txt', 'rU')
 
+# Initialize Selenium for dynamic scraping purposes
+driver = webdriver.Firefox()
+
 # Unary search
 # Iterate through each of the query words
 
 for word in tech_words:
 	url = 'http://www.poetryfoundation.org/search/poems#qs=' + word
-	search = urllib2.urlopen(url).read()
+	driver.get(url)
+	time.sleep(3)
 
-	soup = BeautifulSoup(search)
+	html = driver.page_source
+	soup = BeautifulSoup(html)
+	results = soup.find('div', id='search-results')
+	links = results.find_all('a', 'title')
 
-	# Getting dynamically created elements is slightly problematic
-	# Going to try Selenium WebDriver for this--have used it in PHP
+	for l in links:
+		link = l.get('href')
+		poem_url = 'http://www.poetryfoundation.org' + link
+		driver.get(poem_url)
+		
+		poem_html = driver.page_source
+		soup = BeautifulSoup(poem_html)
+		poem = soup.find('div', 'poem')
+		poem_text = poem.find_all('div')
 
-	# Code below is not correct. Only for conceptual purposes
-	results = soup.find(id='search-results')
-	poems = results.find_all('href')
+		word_list = []
 
-	for link.get_text() in poems:
+		for line in poem_text:
+			line = line.get_text()
+			line = line.split(' ')
+			for li in line:
+				word_list.append(li)
+		
+		credits = soup.find('div', 'credit')
+		date = re.search(r'([0-9]{4})', str(credits))
 
-		# Open the link of the poem
-		l = 'http://www.poetryfoundation.org/' + link
-		poem = urllib2.urlopen(l).read()
+		# At this point, we can write to the file based on
+		# either the subject of the poem or by the year. If we're
+		# writng based on year, then what are the cutoff dates?
 
-		# Grab the poem text and the pub date
+		break
 
-		# Based on the pub date, output the poem's text to one of the files
-
-		# Lather, rinse, repeat
-
+	break
 
 

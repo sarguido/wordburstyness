@@ -10,9 +10,7 @@ cinematographer
 videographer
 movie
 projector
-moving image
 cinema
-magnetic tape
 cinematic
 talkies
 DVD
@@ -20,12 +18,10 @@ VCR
 VHS
 television
 TV
-broadcast
-remote control 
+broadcast 
 Internet
 computer
 laptop
-keyboard
 website
 blog
 browser

@@ -1,7 +1,7 @@
 image
 picture
 plate
-stream(ing)
+streaming
 technology
 pause
 play
@@ -11,12 +11,14 @@ studio
 negative
 lens
 celluloid
-lens
 tape
-theater/theatre
+theater
+theatre
 reel
-porn / pornography
-animation / animate
+porn
+pornography
+animation
+animate
 channel
 screen
 program
@@ -26,3 +28,4 @@ series
 network
 antenna
 web
+keyboard

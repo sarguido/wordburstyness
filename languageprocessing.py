@@ -3,9 +3,8 @@
 
 import nltk, re
 from nltk.corpus import stopwords
-from mrjob.job import MRJob
 
-# Removing stopwords, stemming, etc for a better word analysis
+# Removing stopwords
 
 f = open('2010_before.txt', 'rU')
 f1 = open('2010_before_nltk.txt', 'w')
